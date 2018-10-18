@@ -1,0 +1,1 @@
+{"_comment":"Please don't edit. This is Architect data.","name":"etkfront","resources":[],"requires":["font-awesome"],"theme":"theme-triton-4c6d551b-4da5-4352-88de-6d6d39627774","classpath":"${app.dir}/app,${app.dir}/app/override/form/field/","css":[],"js":[{"path":"app/override/form/field/Display.js","includeInBundle":true}]}

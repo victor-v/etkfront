@@ -1,0 +1,20 @@
+{
+    "type": "jsoverrideresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_0ta8snup",
+        "includeInBundle": true,
+        "url": "app/override/form/field/Display.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "string"
+    },
+    "name": "js",
+    "designerId": "6c7a9fd9-e53b-499c-a17a-7d8d16815cee"
+}
