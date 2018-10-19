@@ -71,7 +71,7 @@ Ext.define('etkfront.view.MyViewport', {
                                         console.log('test');
                                         for (var i = 0; i < 100; i++) {
                                             Ext.Ajax.request({
-                                                url: 'http://laravel-pass/api/auth/signup',
+                                                url: 'http://passport-laravel/api/v1/auth/signup',
 
                                                 method: 'POST',
                                                 cors: true,

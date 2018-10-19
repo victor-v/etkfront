@@ -253,8 +253,18 @@
         "model": true,
         "controller": true,
         "resource": true,
-        "1391499f-f2d8-492d-b4e0-c030d282c5e8": {
-            "id": "1391499f-f2d8-492d-b4e0-c030d282c5e8"
+        "c00a5ace-a11e-46eb-bdca-982688df301f": {
+            "id": "c00a5ace-a11e-46eb-bdca-982688df301f",
+            "cn": [
+                {
+                    "id": "7d8f0229-352d-4100-812b-25a04d6e4837",
+                    "cn": [
+                        {
+                            "id": "15be895d-d766-4e2e-8fd3-4d1e416e0873"
+                        }
+                    ]
+                }
+            ]
         },
         "94b1fdb8-c3a2-4f50-be73-017216b08abf": {
             "id": "94b1fdb8-c3a2-4f50-be73-017216b08abf"
