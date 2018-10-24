@@ -98,31 +98,13 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Логин"
+                                        "fieldLabel": "ПИН ФЛ"
                                     },
                                     "configAlternates": {
                                         "fieldLabel": "string"
                                     },
                                     "name": "MyDisplayField",
                                     "designerId": "6a362aa3-fdd7-4f5f-8a7e-385f6ccdbae2"
-                                },
-                                {
-                                    "type": "Ext.form.field.Display",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "fieldLabel": "Пароль",
-                                        "value": "Display Field"
-                                    },
-                                    "configAlternates": {
-                                        "fieldLabel": "string",
-                                        "value": "string"
-                                    },
-                                    "name": "MyDisplayField1",
-                                    "designerId": "27705e56-b233-4d77-80bd-6d249841b868"
                                 },
                                 {
                                     "type": "Ext.form.field.Display",
@@ -334,7 +316,7 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "height": 451,
-                                        "title": "Ошибки"
+                                        "title": "Полная детальная информация по ТК"
                                     },
                                     "configAlternates": {
                                         "title": "string",
@@ -556,7 +538,7 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "height": 496,
-                                        "title": "Трудовая"
+                                        "title": "Обобщенная информация по трудовой"
                                     },
                                     "configAlternates": {
                                         "title": "string",
@@ -1445,7 +1427,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Логин"
+                                        "fieldLabel": "ПИН ФЛ"
                                     },
                                     "configAlternates": {
                                         "fieldLabel": "string"
@@ -1461,15 +1443,29 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Пароль",
-                                        "value": "Display Field"
+                                        "fieldLabel": "ИНН ЮЛ"
                                     },
                                     "configAlternates": {
-                                        "fieldLabel": "string",
-                                        "value": "string"
+                                        "fieldLabel": "string"
                                     },
-                                    "name": "MyDisplayField1",
-                                    "designerId": "d5389daa-d9ec-4e0a-b041-66da5abbf8b0"
+                                    "name": "MyDisplayField6",
+                                    "designerId": "85d824c0-f2ad-4552-8fa2-06b16594fd01"
+                                },
+                                {
+                                    "type": "Ext.form.field.Display",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "СОАТО"
+                                    },
+                                    "configAlternates": {
+                                        "fieldLabel": "string"
+                                    },
+                                    "name": "MyDisplayField7",
+                                    "designerId": "df2bbe74-990c-40f1-8e04-d09de229dbe8"
                                 },
                                 {
                                     "type": "Ext.form.field.Display",
@@ -1533,7 +1529,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Физ лицо"
+                                        "title": "Структура организации"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -1561,7 +1557,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Компания"
+                                        "title": "Список должностей"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -1589,7 +1585,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Tab 3"
+                                        "title": "Список сотрудников на дату"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -1606,6 +1602,118 @@
                                             "codeClass": null,
                                             "name": "TabConfig2",
                                             "designerId": "e6d7c6a2-bd77-45a7-9b4b-c79f10c51ea0"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "Активные трудовые договоры"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyPanel8",
+                                    "designerId": "22e53a83-9200-4d5e-a505-85f20dd28215",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.tab.Tab",
+                                            "reference": {
+                                                "name": "tabConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "TabConfig2",
+                                            "designerId": "b9a246d9-935a-4141-b291-70b23c9aa093"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "Список своих пользователей"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyPanel9",
+                                    "designerId": "4435fc10-470a-40cd-b6e4-317f7c0a6518",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.tab.Tab",
+                                            "reference": {
+                                                "name": "tabConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "TabConfig2",
+                                            "designerId": "ed549389-a10c-48b7-bb83-d90c0a461a06"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "Детализированная информация по ТК своего сотрудника"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyPanel10",
+                                    "designerId": "c84a65a3-c2a0-464f-b395-ac383e4a2f3d",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.tab.Tab",
+                                            "reference": {
+                                                "name": "tabConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "TabConfig2",
+                                            "designerId": "848537ee-f88f-4c98-bcbe-3bd34b7561f5"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "Обощенная информация по ТК своего сотрудника"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyPanel11",
+                                    "designerId": "a9697510-b9ff-4257-8ded-da9ea306eccc",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.tab.Tab",
+                                            "reference": {
+                                                "name": "tabConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "TabConfig2",
+                                            "designerId": "cdbb8ece-7b84-463a-9e92-07b0b6c2c0c9"
                                         }
                                     ]
                                 }
@@ -1667,7 +1775,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Логин"
+                                        "fieldLabel": "ПИН ФЛ"
                                     },
                                     "configAlternates": {
                                         "fieldLabel": "string"
@@ -1683,15 +1791,45 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Пароль",
-                                        "value": "Display Field"
+                                        "fieldLabel": "ИНН ЮЛ"
                                     },
                                     "configAlternates": {
-                                        "fieldLabel": "string",
-                                        "value": "string"
+                                        "fieldLabel": "string"
                                     },
-                                    "name": "MyDisplayField1",
-                                    "designerId": "878e5cc6-06d5-4dc5-a29d-d061eac103ab"
+                                    "name": "MyDisplayField8",
+                                    "designerId": "756d8250-7d19-4712-9561-a8ec4072ac2c"
+                                },
+                                {
+                                    "type": "Ext.form.field.Display",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "СОАТО"
+                                    },
+                                    "configAlternates": {
+                                        "fieldLabel": "string"
+                                    },
+                                    "name": "MyDisplayField9",
+                                    "designerId": "64234708-653c-4d4b-bbcf-3391c31a0f96"
+                                },
+                                {
+                                    "type": "Ext.form.field.Display",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "СОАТО МИНЗТО"
+                                    },
+                                    "configAlternates": {
+                                        "fieldLabel": "string"
+                                    },
+                                    "name": "MyDisplayField10",
+                                    "designerId": "3ebbffc9-df25-46bc-87c8-d44058beb3a0"
                                 },
                                 {
                                     "type": "Ext.form.field.Display",
@@ -1755,7 +1893,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Физ лицо"
+                                        "title": "Список всех своих организаций(структур)"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -1783,7 +1921,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Компания"
+                                        "title": "Список всех своих работающих по организации нах в его ведении(соато в иерархии) на конкретную дату"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -1811,7 +1949,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Tab 3"
+                                        "title": "Должности любой организации но из своего региона"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -1828,6 +1966,34 @@
                                             "codeClass": null,
                                             "name": "TabConfig2",
                                             "designerId": "0a75cfd2-924b-4bd2-969e-fcb35f0aec65"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "пока все"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyPanel13",
+                                    "designerId": "585a1236-9be4-4655-99fc-fdb12cfc00d9",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.tab.Tab",
+                                            "reference": {
+                                                "name": "tabConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "TabConfig2",
+                                            "designerId": "4f692e84-0a5a-4e9d-b423-58ef2ba3cba4"
                                         }
                                     ]
                                 }
@@ -1889,7 +2055,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Логин"
+                                        "fieldLabel": "ПИН ФЛ"
                                     },
                                     "configAlternates": {
                                         "fieldLabel": "string"
@@ -1905,15 +2071,45 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Пароль",
-                                        "value": "Display Field"
+                                        "fieldLabel": "ПИН ФЛ"
                                     },
                                     "configAlternates": {
-                                        "fieldLabel": "string",
-                                        "value": "string"
+                                        "fieldLabel": "string"
                                     },
                                     "name": "MyDisplayField1",
-                                    "designerId": "7d693016-100f-461f-8513-02a45f9456c9"
+                                    "designerId": "7f089109-ceee-405b-9612-576744a9fd1b"
+                                },
+                                {
+                                    "type": "Ext.form.field.Display",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "ПИН ФЛ"
+                                    },
+                                    "configAlternates": {
+                                        "fieldLabel": "string"
+                                    },
+                                    "name": "MyDisplayField11",
+                                    "designerId": "20ebc3b4-ea87-4540-b1e6-5dd210e5a3e5"
+                                },
+                                {
+                                    "type": "Ext.form.field.Display",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "ПИН ФЛ"
+                                    },
+                                    "configAlternates": {
+                                        "fieldLabel": "string"
+                                    },
+                                    "name": "MyDisplayField12",
+                                    "designerId": "5168855d-beda-4e8f-b92e-61b7d8e5f659"
                                 },
                                 {
                                     "type": "Ext.form.field.Display",
@@ -1977,7 +2173,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Физ лицо"
+                                        "title": "Справочник констант"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -2005,7 +2201,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Компания"
+                                        "title": "Справочник пользователей"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -2033,7 +2229,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Tab 3"
+                                        "title": "Лог журнал"
                                     },
                                     "configAlternates": {
                                         "title": "string"
@@ -2050,6 +2246,62 @@
                                             "codeClass": null,
                                             "name": "TabConfig2",
                                             "designerId": "966e5376-ac34-40c9-80e4-5dfa5f6e6c7c"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "Коды ошибок"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyPanel7",
+                                    "designerId": "68ea61ef-7d7d-4922-948d-1dfeaea473a0",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.tab.Tab",
+                                            "reference": {
+                                                "name": "tabConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "TabConfig2",
+                                            "designerId": "fc3f44a8-0b12-4a0c-81e3-85bd2d376f24"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "Лог по записи"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyPanel12",
+                                    "designerId": "4a7cb276-4b15-4e28-8309-c6803e362f90",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.tab.Tab",
+                                            "reference": {
+                                                "name": "tabConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "name": "TabConfig2",
+                                            "designerId": "ec3464f1-ac18-4901-a3a1-44f7ce895cff"
                                         }
                                     ]
                                 }

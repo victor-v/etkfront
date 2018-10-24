@@ -53,12 +53,7 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
-                                },
-                                {
-                                    xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
@@ -95,7 +90,7 @@ Ext.define('etkfront.view.MyViewport', {
                                 {
                                     xtype: 'panel',
                                     height: 451,
-                                    title: 'Ошибки',
+                                    title: 'Полная детальная информация по ТК',
                                     items: [
                                         {
                                             xtype: 'displayfield',
@@ -144,7 +139,7 @@ Ext.define('etkfront.view.MyViewport', {
                                 {
                                     xtype: 'panel',
                                     height: 496,
-                                    title: 'Трудовая',
+                                    title: 'Обобщенная информация по трудовой',
                                     items: [
                                         {
                                             xtype: 'displayfield',
@@ -379,12 +374,15 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
+                                    fieldLabel: 'ИНН ЮЛ'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'СОАТО'
                                 },
                                 {
                                     xtype: 'displayfield',
@@ -404,15 +402,31 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Физ лицо'
+                                    title: 'Структура организации'
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Компания'
+                                    title: 'Список должностей'
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Tab 3'
+                                    title: 'Список сотрудников на дату'
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Активные трудовые договоры'
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Список своих пользователей'
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Детализированная информация по ТК своего сотрудника'
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Обощенная информация по ТК своего сотрудника'
                                 }
                             ]
                         }
@@ -429,12 +443,19 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
+                                    fieldLabel: 'ИНН ЮЛ'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'СОАТО'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'СОАТО МИНЗТО'
                                 },
                                 {
                                     xtype: 'displayfield',
@@ -454,15 +475,19 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Физ лицо'
+                                    title: 'Список всех своих организаций(структур)'
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Компания'
+                                    title: 'Список всех своих работающих по организации нах в его ведении(соато в иерархии) на конкретную дату'
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Tab 3'
+                                    title: 'Должности любой организации но из своего региона'
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'пока все'
                                 }
                             ]
                         }
@@ -479,12 +504,19 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
+                                    fieldLabel: 'ПИН ФЛ'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'ПИН ФЛ'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
@@ -504,15 +536,23 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Физ лицо'
+                                    title: 'Справочник констант'
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Компания'
+                                    title: 'Справочник пользователей'
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Tab 3'
+                                    title: 'Лог журнал'
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Коды ошибок'
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Лог по записи'
                                 }
                             ]
                         }
