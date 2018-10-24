@@ -23,7 +23,7 @@ Ext.define('etkfront.model.works', {
 
     proxy: {
         type: 'rest',
-        url: 'http://etkback/api/v1/works',
+        url: 'https://etkback/api/v1/works',
         reader: {
             type: 'json',
             rootProperty: 'DATA'

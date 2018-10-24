@@ -192,7 +192,7 @@
                                                 "implHandler": [
                                                     "var me = this;",
                                                     "Ext.Ajax.request({",
-                                                    "    url: 'http://etkback/oauth/token',",
+                                                    "    url: 'https://etkback/oauth/token',",
                                                     "",
                                                     "    method: 'POST',",
                                                     "",
@@ -264,7 +264,7 @@
                                                 "implHandler": [
                                                     "var me = this;",
                                                     "Ext.Ajax.request({",
-                                                    "    url: 'http://etkback/oauth/token',",
+                                                    "    url: 'https://etkback/oauth/token',",
                                                     "",
                                                     "    method: 'POST',",
                                                     "",
