@@ -22,7 +22,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "http://etkback/api/v1/works"
+                "url": "https://etkback/api/v1/works"
             },
             "configAlternates": {
                 "url": "string"
