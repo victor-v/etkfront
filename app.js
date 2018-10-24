@@ -20,6 +20,15 @@ Ext.Loader.setConfig({
 
 
 Ext.application({
+    models: [
+        'errors',
+        'works'
+    ],
+    stores: [
+        'errors',
+        'works',
+        'MyStore2'
+    ],
     views: [
         'MyViewport'
     ],

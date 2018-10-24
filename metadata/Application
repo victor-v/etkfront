@@ -6,14 +6,25 @@
     },
     "codeClass": null,
     "userConfig": {
+        "models": [
+            "errors",
+            "works"
+        ],
         "name": "etkfront",
+        "stores": [
+            "errors",
+            "works",
+            "MyStore2"
+        ],
         "views": [
             "MyViewport"
         ]
     },
     "configAlternates": {
         "name": "string",
-        "views": "typedarray"
+        "views": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray"
     },
     "name": "Application",
     "designerId": "application"
