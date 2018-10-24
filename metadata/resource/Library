@@ -7,7 +7,6 @@
     "codeClass": null,
     "userConfig": {
         "basePath": "ext/",
-        "debug": true,
         "designer|userClassName": "Library",
         "libraryRequires": [
             "font-awesome"
