@@ -133,11 +133,13 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "fieldLabel": "Token",
+                                        "reference": "token",
                                         "value": "Display Field"
                                     },
                                     "configAlternates": {
                                         "fieldLabel": "string",
-                                        "value": "string"
+                                        "value": "string",
+                                        "reference": "string"
                                     },
                                     "name": "MyDisplayField2",
                                     "designerId": "81419233-d88b-422b-9e0f-a214033c6b4e"
@@ -151,72 +153,16 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "fieldLabel": "RenewToken",
+                                        "reference": "refresh",
                                         "value": "Display Field"
                                     },
                                     "configAlternates": {
                                         "fieldLabel": "string",
-                                        "value": "string"
+                                        "value": "string",
+                                        "reference": "string"
                                     },
                                     "name": "MyDisplayField3",
                                     "designerId": "da34e7b9-6fd1-42d1-85f5-f9e4e8fdb91b"
-                                },
-                                {
-                                    "type": "Ext.button.Button",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "text": "Зарегистрировать"
-                                    },
-                                    "configAlternates": {
-                                        "text": "string"
-                                    },
-                                    "name": "MyButton",
-                                    "designerId": "818141c7-a822-4fcc-9823-1c591688a63d",
-                                    "cn": [
-                                        {
-                                            "type": "fixedfunction",
-                                            "reference": {
-                                                "name": "items",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "designer|params": [
-                                                    "button",
-                                                    "e"
-                                                ],
-                                                "fn": "handler",
-                                                "implHandler": [
-                                                    "console.log('test');",
-                                                    "for (var i = 0; i < 100; i++) {",
-                                                    "    Ext.Ajax.request({",
-                                                    "    url: 'http://laravel-pass/api/auth/signup',",
-                                                    "",
-                                                    "    method: 'POST',",
-                                                    "    cors: true,",
-                                                    "    useDefaultXhrHeader : false,",
-                                                    "    params: {",
-                                                    "        pin:i,",
-                                                    "        password:\"123456\",",
-                                                    "        password_confirmation:\"123456\",",
-                                                    "        _dc: new Date().getTime()",
-                                                    "    }",
-                                                    "});",
-                                                    "}"
-                                                ]
-                                            },
-                                            "configAlternates": {
-                                                "designer|params": "typedarray",
-                                                "fn": "string",
-                                                "implHandler": "code"
-                                            },
-                                            "name": "handler",
-                                            "designerId": "61780c64-ba0d-4f9e-b5be-a6b5421ce6bc"
-                                        }
-                                    ]
                                 },
                                 {
                                     "type": "Ext.button.Button",
@@ -235,33 +181,36 @@
                                     "designerId": "8bf62d2e-4111-45e0-a0af-ba262e1e9a71",
                                     "cn": [
                                         {
-                                            "type": "fixedfunction",
+                                            "type": "viewcontrollereventbinding",
                                             "reference": {
-                                                "name": "items",
+                                                "name": "listeners",
                                                 "type": "array"
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "designer|params": [
-                                                    "button",
-                                                    "e"
-                                                ],
-                                                "fn": "handler",
+                                                "fn": "onButtonClick",
                                                 "implHandler": [
-                                                    "console.log('test');",
+                                                    "var me = this;",
                                                     "Ext.Ajax.request({",
-                                                    "    url: 'http://laravel-pass/api/auth/login',",
+                                                    "    url: 'http://etkback/oauth/token',",
                                                     "",
                                                     "    method: 'POST',",
                                                     "",
                                                     "    params: {",
-                                                    "        pin:Math.floor(Math.random() * 300000),",
-                                                    "        password:\"123456\",",
-                                                    "        _dc: new Date().getTime()",
+                                                    "\t\"grant_type\" : \"password\",",
+                                                    "    \"client_id\" : \"15\",",
+                                                    "    \"client_secret\" : \"Mfoam6h0VgoMPF6OxCKFi8GRRpanVcIAg0zHaufs\",",
+                                                    "    \"username\" : Math.floor(Math.random() * 200),",
+                                                    "    \"password\" : \"123456\",",
+                                                    "    \"scope\" : \"\"",
                                                     "    },",
                                                     "",
                                                     "    success: function(response, opts) {",
-                                                    "        console.log(response);",
+                                                    "        me.lookup('token').setValue(JSON.parse(response.responseText).access_token);",
+                                                    "        me.lookup('refresh').setValue(JSON.parse(response.responseText).refresh_token);",
+                                                    "        Ext.Ajax.setDefaultHeaders({",
+                                                    "    Authorization : 'Bearer ' + JSON.parse(response.responseText).access_token",
+                                                    "    });",
                                                     "    },",
                                                     "",
                                                     "    failure: function(response, opts) {",
@@ -272,15 +221,89 @@
                                                     "        console.log(response);",
                                                     "    }",
                                                     "});"
-                                                ]
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
                                             },
                                             "configAlternates": {
-                                                "designer|params": "typedarray",
                                                 "fn": "string",
-                                                "implHandler": "code"
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
                                             },
-                                            "name": "handler",
-                                            "designerId": "68c196b7-dd2d-4d29-bb46-0af3dc1dadc0"
+                                            "name": "onButtonClick",
+                                            "designerId": "e0397c92-b38e-4ac1-a0ad-c3ab2c9baca5"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "text": "обновить"
+                                    },
+                                    "configAlternates": {
+                                        "text": "string"
+                                    },
+                                    "name": "MyButton2",
+                                    "designerId": "b6ca36c0-8aa3-4ce2-9d00-9cc164b04bbd",
+                                    "cn": [
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onButtonClick1",
+                                                "implHandler": [
+                                                    "var me = this;",
+                                                    "Ext.Ajax.request({",
+                                                    "    url: 'http://etkback/oauth/token',",
+                                                    "",
+                                                    "    method: 'POST',",
+                                                    "",
+                                                    "    params: {",
+                                                    "        \"grant_type\" : \"refresh_token\",",
+                                                    "        \"client_id\" : \"15\",",
+                                                    "        \"client_secret\" : \"Mfoam6h0VgoMPF6OxCKFi8GRRpanVcIAg0zHaufs\",",
+                                                    "        \"refresh_token\" : me.lookup('refresh').getValue(),",
+                                                    "        \"scope\" : \"\"",
+                                                    "    },",
+                                                    "",
+                                                    "    success: function(response, opts) {",
+                                                    "        me.lookup('token').setValue(JSON.parse(response.responseText).access_token);",
+                                                    "        me.lookup('refresh').setValue(JSON.parse(response.responseText).refresh_token);",
+                                                    "        Ext.Ajax.setDefaultHeaders({",
+                                                    "            Authorization : 'Bearer ' + JSON.parse(response.responseText).access_token",
+                                                    "        });",
+                                                    "    },",
+                                                    "",
+                                                    "    failure: function(response, opts) {",
+                                                    "        console.log(response);",
+                                                    "    },",
+                                                    "",
+                                                    "    callback: function(options, success, response){",
+                                                    "        console.log(response);",
+                                                    "    }",
+                                                    "});"
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onButtonClick1",
+                                            "designerId": "8bb98071-5154-4aa1-a873-6e225e4b5dc3"
                                         }
                                     ]
                                 }
@@ -310,10 +333,12 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Физ лицо"
+                                        "height": 451,
+                                        "title": "Ошибки"
                                     },
                                     "configAlternates": {
-                                        "title": "string"
+                                        "title": "string",
+                                        "height": "auto"
                                     },
                                     "name": "MyPanel",
                                     "designerId": "db5cd86f-23eb-493b-bf84-6e2ed6776c00",
@@ -327,6 +352,198 @@
                                             "codeClass": null,
                                             "name": "TabConfig",
                                             "designerId": "8e4d41a9-2af5-4edd-8b99-a0b3024d6e04"
+                                        },
+                                        {
+                                            "type": "Ext.form.field.Display",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fieldLabel": "Label",
+                                                "reference": "errors",
+                                                "value": "Display Field",
+                                                "width": 418
+                                            },
+                                            "configAlternates": {
+                                                "fieldLabel": "string",
+                                                "reference": "string",
+                                                "value": "string",
+                                                "width": "auto"
+                                            },
+                                            "name": "MyDisplayField4",
+                                            "designerId": "d89135fe-be94-4c5a-b774-0399d6f3c498"
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "itemId": "mybutton",
+                                                "text": "Получить"
+                                            },
+                                            "configAlternates": {
+                                                "itemId": "string",
+                                                "text": "string"
+                                            },
+                                            "name": "MyButton",
+                                            "designerId": "1d3324d3-02b7-4947-b6ef-852ed4e7d65a",
+                                            "cn": [
+                                                {
+                                                    "type": "viewcontrollereventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onMybuttonClick",
+                                                        "implHandler": [
+                                                            "var me = this;",
+                                                            "console.log(me);",
+                                                            "// Ext.Ajax.request({",
+                                                            "//     url: 'http://etkback/api/v1/errors',",
+                                                            "",
+                                                            "//     method: 'get',",
+                                                            "",
+                                                            "//     //    headers: {",
+                                                            "//     //      'Authorization': 'Bearer '+''",
+                                                            "//     //},",
+                                                            "",
+                                                            "//     success: function(response, opts) {",
+                                                            "//         me.lookup('errors').setValue(JSON.parse(response.responseText).data[0].ErrorList);",
+                                                            "//     },",
+                                                            "",
+                                                            "//     failure: function(response, opts) {",
+                                                            "//         console.log(response);",
+                                                            "//     },",
+                                                            "",
+                                                            "//     callback: function(options, success, response){",
+                                                            "//         console.log(response);",
+                                                            "//     }",
+                                                            "// });",
+                                                            "",
+                                                            "Ext.getStore('errors').load();"
+                                                        ],
+                                                        "name": "click",
+                                                        "scope": "me"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string",
+                                                        "scope": "string"
+                                                    },
+                                                    "name": "onMybuttonClick",
+                                                    "designerId": "d273bf54-ba3e-468e-882c-d99b4f814b92"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.grid.Panel",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "store": "errors",
+                                                "title": "My Grid Panel"
+                                            },
+                                            "configAlternates": {
+                                                "store": "store",
+                                                "title": "string"
+                                            },
+                                            "name": "MyGridPanel",
+                                            "designerId": "da845d2c-99c7-4f87-b947-83949943f003",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "id_err",
+                                                        "text": "Номер"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn",
+                                                    "designerId": "b7a17a6c-4329-4cc4-aae6-bd644168fcd8"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "code",
+                                                        "text": "Код"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn1",
+                                                    "designerId": "298cbdd4-5072-460f-b554-c89249513a6e"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "desc_err_ru",
+                                                        "text": "Описание ру"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn2",
+                                                    "designerId": "d05c2b24-b557-4e79-9dfb-ee4e53c75739"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "desc_err_uz",
+                                                        "text": "Описание уз"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn3",
+                                                    "designerId": "9fbfaa83-269c-45b5-9e73-5b5484e04ead"
+                                                },
+                                                {
+                                                    "type": "Ext.view.Table",
+                                                    "reference": {
+                                                        "name": "viewConfig",
+                                                        "type": "object"
+                                                    },
+                                                    "codeClass": null,
+                                                    "name": "MyTable",
+                                                    "designerId": "e2b82af2-925c-4158-ab2c-082ba826754c"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
@@ -338,10 +555,12 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "title": "Компания"
+                                        "height": 496,
+                                        "title": "Трудовая"
                                     },
                                     "configAlternates": {
-                                        "title": "string"
+                                        "title": "string",
+                                        "height": "auto"
                                     },
                                     "name": "MyPanel1",
                                     "designerId": "0b8b5b58-d675-4ad7-afeb-786bb1286c6f",
@@ -355,6 +574,788 @@
                                             "codeClass": null,
                                             "name": "TabConfig1",
                                             "designerId": "b45fd0ff-eeb2-46cd-85a1-b7c3751cc561"
+                                        },
+                                        {
+                                            "type": "Ext.form.field.Display",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fieldLabel": "Label",
+                                                "reference": "work",
+                                                "value": "Display Field",
+                                                "width": 418
+                                            },
+                                            "configAlternates": {
+                                                "fieldLabel": "string",
+                                                "reference": "string",
+                                                "value": "string",
+                                                "width": "auto"
+                                            },
+                                            "name": "MyDisplayField5",
+                                            "designerId": "f3816a2d-c88e-4f15-9547-a54ace35292b"
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "itemId": "mybutton1",
+                                                "text": "Получить"
+                                            },
+                                            "configAlternates": {
+                                                "itemId": "string",
+                                                "text": "string"
+                                            },
+                                            "name": "MyButton3",
+                                            "designerId": "be82465f-8038-4cab-b8c6-ae332543b7cd",
+                                            "cn": [
+                                                {
+                                                    "type": "viewcontrollereventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onMybuttonClick1",
+                                                        "implHandler": [
+                                                            "Ext.getStore('works').load({params:{",
+                                                            "    page:1",
+                                                            "}});"
+                                                        ],
+                                                        "name": "click",
+                                                        "scope": "me"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string",
+                                                        "scope": "string"
+                                                    },
+                                                    "name": "onMybuttonClick1",
+                                                    "designerId": "96f93296-07f9-4a1a-b385-f948a1a808c5"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.grid.Panel",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "store": "works",
+                                                "title": "My Grid Panel"
+                                            },
+                                            "configAlternates": {
+                                                "store": "store",
+                                                "title": "string"
+                                            },
+                                            "name": "MyGridPanel1",
+                                            "designerId": "823fe841-c2f9-41dc-b25f-59bb3e8f5051",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "id_lc",
+                                                        "text": "Уникальный идентификатор в LC"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn",
+                                                    "designerId": "b090fec4-6999-4136-b07e-b3255361b0db"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "parent_id_lc",
+                                                        "text": "Родительская запись"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn1",
+                                                    "designerId": "6f063f5d-8ee2-432c-9f9f-1ecc4bec34f2"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "active_lc",
+                                                        "text": "Активность ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn2",
+                                                    "designerId": "c0552308-c610-45d8-971b-f47e8db21c69"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "datetime_lc",
+                                                        "text": "Дата создания записи"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn3",
+                                                    "designerId": "a3c57061-5e09-4129-b898-a5d0abac0d91"
+                                                },
+                                                {
+                                                    "type": "Ext.view.Table",
+                                                    "reference": {
+                                                        "name": "viewConfig",
+                                                        "type": "object"
+                                                    },
+                                                    "codeClass": null,
+                                                    "name": "MyTable",
+                                                    "designerId": "0485b431-2885-47a5-a51b-b0b05861f1d2"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "daterange_lc",
+                                                        "text": "Диапазон действия ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn4",
+                                                    "designerId": "0414fe3c-24c9-422e-accd-31976ece1e0f"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "type_lc",
+                                                        "text": "Тип записи (Трудовая деятельность, Образование, Военная служба)"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn5",
+                                                    "designerId": "5953a6d4-4c20-4a92-9d6a-96ad6ca2837f"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "direct_lc",
+                                                        "text": "Направление записи ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn6",
+                                                    "designerId": "ce95cf25-29dc-4c58-a88f-53205eb2a52e"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "edit_id_lc",
+                                                        "text": "Редактируемая запись"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn7",
+                                                    "designerId": "4f668e3a-28f7-4f06-8213-668012c0232b"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "pin_lc",
+                                                        "text": "ПИН ФЛ"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn8",
+                                                    "designerId": "668be976-5b10-4041-8e34-b4ef03f14154"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "taxper_lc",
+                                                        "text": "ИНН ФЛ в ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn9",
+                                                    "designerId": "25db570f-44ea-4934-96bf-ae2c7b49dffd"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "passport_lc",
+                                                        "text": "Паспорт"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn10",
+                                                    "designerId": "89afae58-e458-493d-aab8-64f93d5d4f22"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "familyperson_lc",
+                                                        "text": "Фамилия"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn11",
+                                                    "designerId": "6fa9874d-7c52-4183-a011-638c9415a377"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "nameperson_lc",
+                                                        "text": "Имя"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn12",
+                                                    "designerId": "420ea652-c127-4f69-b05e-2cc68c78deb2"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "midlenameperson_lc",
+                                                        "text": "Отчество"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn13",
+                                                    "designerId": "cee5391f-0588-4dd9-8a65-36d3e75e7314"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "tin_lc",
+                                                        "text": "ИНН ЮЛ в ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn14",
+                                                    "designerId": "ca6c9d16-5ce0-4afd-adbe-f62d6bf56cc9"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "name_lc",
+                                                        "text": "Наименование ЮЛ"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn15",
+                                                    "designerId": "c6fa3687-891c-4728-b436-bd093f630493"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "oked_lc",
+                                                        "text": "ОКЭД в ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn16",
+                                                    "designerId": "854200d2-2baa-411a-9230-a86d2003d90b"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "regionent_lc",
+                                                        "text": "СОАТО ЮЛ"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn17",
+                                                    "designerId": "b9036810-a380-4cbf-b773-8e62af5026d7"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "department_lc",
+                                                        "text": "Подразделение ЮЛ"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn18",
+                                                    "designerId": "780364d6-c3ef-4941-aac9-c31630ddfed1"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "position_lc",
+                                                        "text": "Должность"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn19",
+                                                    "designerId": "f13b9c66-af8d-43fb-af32-57e9930c9f1a"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "prof_lc",
+                                                        "text": "Код профессии, должности"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn20",
+                                                    "designerId": "521bf21e-c6fc-45de-abd7-4bc53b15f16b"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "id_position",
+                                                        "text": "Уникальный идентификатор должности"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn21",
+                                                    "designerId": "e4cf983f-51d5-4d2d-97f1-43cbc9ca4905"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "salary_lc",
+                                                        "text": "Зарплата"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn22",
+                                                    "designerId": "38be539a-4e24-45d6-9ef6-e6961468eca8"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "flagbonus_lc",
+                                                        "text": "Признак надбавка"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn23",
+                                                    "designerId": "6e033b67-0729-4ca4-9be7-bf4477bb0700"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "termsalaru_lc",
+                                                        "text": "Условия оплаты труда"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn24",
+                                                    "designerId": "e9c3a0c8-a5f8-4e0c-9275-ed8137547766"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "typeemp_lc",
+                                                        "text": "Вид занятости ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn25",
+                                                    "designerId": "c930a494-6293-44e3-aef3-a845433c6a30"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "codenskz_lc",
+                                                        "text": "Код по НСКЗ"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn26",
+                                                    "designerId": "9aade6f4-0815-48ec-8a85-50e66b79f553"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "order_lc",
+                                                        "text": "Приказ"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn27",
+                                                    "designerId": "51b6d8c5-a904-4904-bb19-c2f496527720"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "dateorder_lc",
+                                                        "text": "Дата приказа"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn28",
+                                                    "designerId": "6e8091d4-c54a-4efb-8338-ee4251f21bae"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "article_lc",
+                                                        "text": "Статья"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn29",
+                                                    "designerId": "bcfe3ec3-1d40-47ee-830b-b2c9fdce8e3d"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "specspo_lc",
+                                                        "text": "Учебная специальность СПО"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn30",
+                                                    "designerId": "661b7c20-b344-4d91-bb84-ce516010d614"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "codespo_ls",
+                                                        "text": "Код специальности СПО"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn31",
+                                                    "designerId": "ee5d5b6d-a1d5-41d0-995a-36a4e075720c"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "specvo_ls",
+                                                        "text": "Учебная специальность ВО"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn32",
+                                                    "designerId": "efb3bf4f-382e-4101-a1f9-f549db1d2d32"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "codevo_ls",
+                                                        "text": "Код специальности ВО"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn33",
+                                                    "designerId": "74425b2c-f578-4a48-95ca-69c2a894d059"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "acceptemployer_lc",
+                                                        "text": "Подтверждение работодателя"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn34",
+                                                    "designerId": "342fae58-d582-4c4d-8585-c3fa2c8a6c1d"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "acceptemployee_lc",
+                                                        "text": "Подтверждение работника"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn35",
+                                                    "designerId": "1f53a3a6-af19-4af0-842f-bfa20bc7e0ea"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "warehouse_id",
+                                                        "text": "Идентификатор записи в Хранилище"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn36",
+                                                    "designerId": "fc4614b0-8082-4f59-9152-f59d9c9c0964"
+                                                },
+                                                {
+                                                    "type": "Ext.grid.column.Column",
+                                                    "reference": {
+                                                        "name": "columns",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "dataIndex": "value_fields_lc",
+                                                        "text": "Значения полей ТД"
+                                                    },
+                                                    "configAlternates": {
+                                                        "dataIndex": "datafield",
+                                                        "text": "string"
+                                                    },
+                                                    "name": "MyColumn37",
+                                                    "designerId": "faf5cbc3-755c-43c4-b8b3-d5fa9bf109d5"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },

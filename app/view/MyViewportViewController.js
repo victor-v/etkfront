@@ -15,5 +15,107 @@
 
 Ext.define('etkfront.view.MyViewportViewController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.myviewport'
+    alias: 'controller.myviewport',
+
+    onButtonClick: function(button, e, eOpts) {
+        var me = this;
+        Ext.Ajax.request({
+            url: 'http://etkback/oauth/token',
+
+            method: 'POST',
+
+            params: {
+                "grant_type" : "password",
+                "client_id" : "15",
+                "client_secret" : "Mfoam6h0VgoMPF6OxCKFi8GRRpanVcIAg0zHaufs",
+                "username" : Math.floor(Math.random() * 200),
+                "password" : "123456",
+                "scope" : ""
+            },
+
+            success: function(response, opts) {
+                me.lookup('token').setValue(JSON.parse(response.responseText).access_token);
+                me.lookup('refresh').setValue(JSON.parse(response.responseText).refresh_token);
+                Ext.Ajax.setDefaultHeaders({
+                    Authorization : 'Bearer ' + JSON.parse(response.responseText).access_token
+                });
+            },
+
+            failure: function(response, opts) {
+                console.log(response);
+            },
+
+            callback: function(options, success, response){
+                console.log(response);
+            }
+        });
+    },
+
+    onButtonClick1: function(button, e, eOpts) {
+        var me = this;
+        Ext.Ajax.request({
+            url: 'http://etkback/oauth/token',
+
+            method: 'POST',
+
+            params: {
+                "grant_type" : "refresh_token",
+                "client_id" : "15",
+                "client_secret" : "Mfoam6h0VgoMPF6OxCKFi8GRRpanVcIAg0zHaufs",
+                "refresh_token" : me.lookup('refresh').getValue(),
+                "scope" : ""
+            },
+
+            success: function(response, opts) {
+                me.lookup('token').setValue(JSON.parse(response.responseText).access_token);
+                me.lookup('refresh').setValue(JSON.parse(response.responseText).refresh_token);
+                Ext.Ajax.setDefaultHeaders({
+                    Authorization : 'Bearer ' + JSON.parse(response.responseText).access_token
+                });
+            },
+
+            failure: function(response, opts) {
+                console.log(response);
+            },
+
+            callback: function(options, success, response){
+                console.log(response);
+            }
+        });
+    },
+
+    onMybuttonClick: function(button, e, eOpts) {
+        var me = this;
+        console.log(me);
+        // Ext.Ajax.request({
+        //     url: 'http://etkback/api/v1/errors',
+
+        //     method: 'get',
+
+        //     //    headers: {
+        //     //      'Authorization': 'Bearer '+''
+        //     //},
+
+        //     success: function(response, opts) {
+        //         me.lookup('errors').setValue(JSON.parse(response.responseText).data[0].ErrorList);
+        //     },
+
+        //     failure: function(response, opts) {
+        //         console.log(response);
+        //     },
+
+        //     callback: function(options, success, response){
+        //         console.log(response);
+        //     }
+        // });
+
+        Ext.getStore('errors').load();
+    },
+
+    onMybuttonClick1: function(button, e, eOpts) {
+        Ext.getStore('works').load({params:{
+            page:1
+        }});
+    }
+
 });

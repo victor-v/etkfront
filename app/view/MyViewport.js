@@ -19,11 +19,16 @@ Ext.define('etkfront.view.MyViewport', {
 
     requires: [
         'etkfront.view.MyViewportViewModel',
+        'etkfront.view.MyViewportViewController',
         'Ext.tab.Panel',
         'Ext.tab.Tab',
-        'Ext.form.field.Display'
+        'Ext.form.field.Display',
+        'Ext.grid.Panel',
+        'Ext.grid.column.Column',
+        'Ext.view.Table'
     ],
 
+    controller: 'myviewport',
     viewModel: {
         type: 'myviewport'
     },
@@ -57,65 +62,29 @@ Ext.define('etkfront.view.MyViewport', {
                                 },
                                 {
                                     xtype: 'displayfield',
+                                    reference: 'token',
                                     fieldLabel: 'Token',
                                     value: 'Display Field'
                                 },
                                 {
                                     xtype: 'displayfield',
+                                    reference: 'refresh',
                                     fieldLabel: 'RenewToken',
                                     value: 'Display Field'
                                 },
                                 {
                                     xtype: 'button',
-                                    handler: function(button, e) {
-                                        console.log('test');
-                                        for (var i = 0; i < 100; i++) {
-                                            Ext.Ajax.request({
-                                                url: 'http://laravel-pass/api/auth/signup',
-
-                                                method: 'POST',
-                                                cors: true,
-                                                useDefaultXhrHeader : false,
-                                                params: {
-                                                    pin:i,
-                                                    password:"123456",
-                                                    password_confirmation:"123456",
-                                                    _dc: new Date().getTime()
-                                                }
-                                            });
-                                        }
-                                    },
-                                    text: 'Зарегистрировать'
+                                    text: 'Получить',
+                                    listeners: {
+                                        click: 'onButtonClick'
+                                    }
                                 },
                                 {
                                     xtype: 'button',
-                                    handler: function(button, e) {
-                                        console.log('test');
-                                        Ext.Ajax.request({
-                                            url: 'http://laravel-pass/api/auth/login',
-
-                                            method: 'POST',
-
-                                            params: {
-                                                pin:Math.floor(Math.random() * 300000),
-                                                password:"123456",
-                                                _dc: new Date().getTime()
-                                            },
-
-                                            success: function(response, opts) {
-                                                console.log(response);
-                                            },
-
-                                            failure: function(response, opts) {
-                                                console.log(response);
-                                            },
-
-                                            callback: function(options, success, response){
-                                                console.log(response);
-                                            }
-                                        });
-                                    },
-                                    text: 'Получить'
+                                    text: 'обновить',
+                                    listeners: {
+                                        click: 'onButtonClick1'
+                                    }
                                 }
                             ]
                         },
@@ -125,11 +94,271 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Физ лицо'
+                                    height: 451,
+                                    title: 'Ошибки',
+                                    items: [
+                                        {
+                                            xtype: 'displayfield',
+                                            reference: 'errors',
+                                            width: 418,
+                                            fieldLabel: 'Label',
+                                            value: 'Display Field'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            itemId: 'mybutton',
+                                            text: 'Получить',
+                                            listeners: {
+                                                click: 'onMybuttonClick'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            store: 'errors',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'id_err',
+                                                    text: 'Номер'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'code',
+                                                    text: 'Код'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'desc_err_ru',
+                                                    text: 'Описание ру'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'desc_err_uz',
+                                                    text: 'Описание уз'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Компания'
+                                    height: 496,
+                                    title: 'Трудовая',
+                                    items: [
+                                        {
+                                            xtype: 'displayfield',
+                                            reference: 'work',
+                                            width: 418,
+                                            fieldLabel: 'Label',
+                                            value: 'Display Field'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            itemId: 'mybutton1',
+                                            text: 'Получить',
+                                            listeners: {
+                                                click: 'onMybuttonClick1'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            store: 'works',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'id_lc',
+                                                    text: 'Уникальный идентификатор в LC'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'parent_id_lc',
+                                                    text: 'Родительская запись'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'active_lc',
+                                                    text: 'Активность ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'datetime_lc',
+                                                    text: 'Дата создания записи'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'daterange_lc',
+                                                    text: 'Диапазон действия ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'type_lc',
+                                                    text: 'Тип записи (Трудовая деятельность, Образование, Военная служба)'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'direct_lc',
+                                                    text: 'Направление записи ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'edit_id_lc',
+                                                    text: 'Редактируемая запись'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'pin_lc',
+                                                    text: 'ПИН ФЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'taxper_lc',
+                                                    text: 'ИНН ФЛ в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'passport_lc',
+                                                    text: 'Паспорт'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'familyperson_lc',
+                                                    text: 'Фамилия'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'nameperson_lc',
+                                                    text: 'Имя'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'midlenameperson_lc',
+                                                    text: 'Отчество'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'tin_lc',
+                                                    text: 'ИНН ЮЛ в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'name_lc',
+                                                    text: 'Наименование ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'oked_lc',
+                                                    text: 'ОКЭД в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'regionent_lc',
+                                                    text: 'СОАТО ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'department_lc',
+                                                    text: 'Подразделение ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'position_lc',
+                                                    text: 'Должность'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'prof_lc',
+                                                    text: 'Код профессии, должности'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'id_position',
+                                                    text: 'Уникальный идентификатор должности'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'salary_lc',
+                                                    text: 'Зарплата'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'flagbonus_lc',
+                                                    text: 'Признак надбавка'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'termsalaru_lc',
+                                                    text: 'Условия оплаты труда'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'typeemp_lc',
+                                                    text: 'Вид занятости ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codenskz_lc',
+                                                    text: 'Код по НСКЗ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'order_lc',
+                                                    text: 'Приказ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'dateorder_lc',
+                                                    text: 'Дата приказа'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'article_lc',
+                                                    text: 'Статья'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'specspo_lc',
+                                                    text: 'Учебная специальность СПО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codespo_ls',
+                                                    text: 'Код специальности СПО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'specvo_ls',
+                                                    text: 'Учебная специальность ВО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codevo_ls',
+                                                    text: 'Код специальности ВО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'acceptemployer_lc',
+                                                    text: 'Подтверждение работодателя'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'acceptemployee_lc',
+                                                    text: 'Подтверждение работника'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'warehouse_id',
+                                                    text: 'Идентификатор записи в Хранилище'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'value_fields_lc',
+                                                    text: 'Значения полей ТД'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
