@@ -22,7 +22,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "https://etkback/api/v1/errors"
+                "url": "https://etk.micros.uz/api/v1/errors"
             },
             "configAlternates": {
                 "url": "string"

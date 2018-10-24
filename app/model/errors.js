@@ -23,7 +23,7 @@ Ext.define('etkfront.model.errors', {
 
     proxy: {
         type: 'rest',
-        url: 'https://etkback/api/v1/errors',
+        url: 'https://etk.micros.uz/api/v1/errors',
         reader: {
             type: 'json',
             rootProperty: 'DATA'

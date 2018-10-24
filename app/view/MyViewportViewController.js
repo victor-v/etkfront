@@ -20,7 +20,7 @@ Ext.define('etkfront.view.MyViewportViewController', {
     onButtonClick: function(button, e, eOpts) {
         var me = this;
         Ext.Ajax.request({
-            url: 'https://etkback/oauth/token',
+            url: 'https://etk.micros.uz/oauth/token',
 
             method: 'POST',
 
@@ -54,7 +54,7 @@ Ext.define('etkfront.view.MyViewportViewController', {
     onButtonClick1: function(button, e, eOpts) {
         var me = this;
         Ext.Ajax.request({
-            url: 'https://etkback/oauth/token',
+            url: 'https://etk.micros.uz/oauth/token',
 
             method: 'POST',
 
