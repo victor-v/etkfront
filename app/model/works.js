@@ -26,7 +26,8 @@ Ext.define('etkfront.model.works', {
         url: 'https://etk.micros.uz/api/v1/works',
         reader: {
             type: 'json',
-            rootProperty: 'DATA'
+            rootProperty: 'data.DATA',
+            totalProperty: 'data.TOTAL'
         }
     }
 });

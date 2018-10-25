@@ -14,7 +14,9 @@
         "stores": [
             "errors",
             "works",
-            "MyStore2"
+            "lcju",
+            "strucju",
+            "MyStore"
         ],
         "views": [
             "MyViewport"

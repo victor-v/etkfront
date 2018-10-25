@@ -28,7 +28,7 @@ Ext.define('etkfront.view.MyViewportViewController', {
                 "grant_type" : "password",
                 "client_id" : "15",
                 "client_secret" : "Mfoam6h0VgoMPF6OxCKFi8GRRpanVcIAg0zHaufs",
-                "username" : Math.floor(Math.random() * 200),
+                "username" : me.lookup('flpin').getValue(),
                 "password" : "123456",
                 "scope" : ""
             },
@@ -84,6 +84,12 @@ Ext.define('etkfront.view.MyViewportViewController', {
         });
     },
 
+    onMybuttonClick1: function(button, e, eOpts) {
+        Ext.getStore('works').load({params:{
+            page:1
+        }});
+    },
+
     onMybuttonClick: function(button, e, eOpts) {
         var me = this;
         console.log(me);
@@ -112,10 +118,72 @@ Ext.define('etkfront.view.MyViewportViewController', {
         Ext.getStore('errors').load();
     },
 
-    onMybuttonClick1: function(button, e, eOpts) {
-        Ext.getStore('works').load({params:{
-            page:1
-        }});
+    onButtonClick2: function(button, e, eOpts) {
+        var me = this;
+        Ext.Ajax.request({
+            url: 'https://etk.micros.uz/oauth/token',
+
+            method: 'POST',
+
+            params: {
+                "grant_type" : "password",
+                "client_id" : "15",
+                "client_secret" : "Mfoam6h0VgoMPF6OxCKFi8GRRpanVcIAg0zHaufs",
+                "username" : me.lookup('pinju').getValue(),
+                "user_tin_company" : me.lookup('tinju').getValue(),
+                "password" : "123456",
+                "scope" : ""
+            },
+
+            success: function(response, opts) {
+                me.lookup('tokenju').setValue(JSON.parse(response.responseText).access_token);
+                me.lookup('refreshju').setValue(JSON.parse(response.responseText).refresh_token);
+                Ext.Ajax.setDefaultHeaders({
+                    Authorization : 'Bearer ' + JSON.parse(response.responseText).access_token
+                });
+            },
+
+            failure: function(response, opts) {
+                console.log(response);
+            },
+
+            callback: function(options, success, response){
+                console.log(response);
+            }
+        });
+    },
+
+    onButtonClick11: function(button, e, eOpts) {
+        var me = this;
+        Ext.Ajax.request({
+            url: 'https://etk.micros.uz/oauth/token',
+
+            method: 'POST',
+
+            params: {
+                "grant_type" : "refresh_token",
+                "client_id" : "15",
+                "client_secret" : "Mfoam6h0VgoMPF6OxCKFi8GRRpanVcIAg0zHaufs",
+                "refresh_token" : me.lookup('refreshju').getValue(),
+                "scope" : ""
+            },
+
+            success: function(response, opts) {
+                me.lookup('tokenju').setValue(JSON.parse(response.responseText).access_token);
+                me.lookup('refreshju').setValue(JSON.parse(response.responseText).refresh_token);
+                Ext.Ajax.setDefaultHeaders({
+                    Authorization : 'Bearer ' + JSON.parse(response.responseText).access_token
+                });
+            },
+
+            failure: function(response, opts) {
+                console.log(response);
+            },
+
+            callback: function(options, success, response){
+                console.log(response);
+            }
+        });
     }
 
 });

@@ -38,10 +38,12 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "rootProperty": "DATA"
+                        "rootProperty": "data.DATA",
+                        "totalProperty": "data.TOTAL"
                     },
                     "configAlternates": {
-                        "rootProperty": "string"
+                        "rootProperty": "string",
+                        "totalProperty": "string"
                     },
                     "name": "MyJsonReader",
                     "designerId": "03ae8733-cdc3-4464-93e8-43fb938892b3"
