@@ -26,8 +26,8 @@ Ext.define('etkfront.model.errors', {
         url: 'https://etk.micros.uz/api/v1/errors',
         reader: {
             type: 'json',
-            rootProperty: 'data.DATA',
-            totalProperty: 'data.TOTAL'
+            rootProperty: 'data.data',
+            totalProperty: 'data.total'
         }
     }
 });
