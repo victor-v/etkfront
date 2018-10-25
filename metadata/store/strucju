@@ -6,13 +6,13 @@
     },
     "codeClass": null,
     "userConfig": {
-        "designer|userClassName": "MyStore2",
-        "storeId": "MyStore2"
+        "designer|userClassName": "strucju",
+        "storeId": "strucju"
     },
     "configAlternates": {
         "designer|userClassName": "string",
         "storeId": "string"
     },
-    "name": "MyStore2",
-    "designerId": "3741e9a9-66e6-4d97-9a77-cefcc2be6039"
+    "name": "MyStore",
+    "designerId": "e7d4769a-7e43-4365-8cd6-99b898de513d"
 }

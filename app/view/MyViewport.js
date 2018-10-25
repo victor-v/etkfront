@@ -22,10 +22,13 @@ Ext.define('etkfront.view.MyViewport', {
         'etkfront.view.MyViewportViewController',
         'Ext.tab.Panel',
         'Ext.tab.Tab',
+        'Ext.form.field.TextArea',
         'Ext.form.field.Display',
         'Ext.grid.Panel',
-        'Ext.grid.column.Column',
-        'Ext.view.Table'
+        'Ext.view.Table',
+        'Ext.grid.column.Number',
+        'Ext.grid.column.Date',
+        'Ext.grid.column.Boolean'
     ],
 
     controller: 'myviewport',
@@ -52,25 +55,21 @@ Ext.define('etkfront.view.MyViewport', {
                             layout: 'column',
                             items: [
                                 {
-                                    xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
+                                    xtype: 'textfield',
+                                    reference: 'flpin',
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
-                                    xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
-                                },
-                                {
-                                    xtype: 'displayfield',
+                                    xtype: 'textareafield',
                                     reference: 'token',
-                                    fieldLabel: 'Token',
-                                    value: 'Display Field'
+                                    maxHeight: 100,
+                                    fieldLabel: 'Token'
                                 },
                                 {
-                                    xtype: 'displayfield',
+                                    xtype: 'textareafield',
                                     reference: 'refresh',
-                                    fieldLabel: 'RenewToken',
-                                    value: 'Display Field'
+                                    maxHeight: 100,
+                                    fieldLabel: 'RenewToken'
                                 },
                                 {
                                     xtype: 'button',
@@ -94,57 +93,8 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    height: 451,
-                                    title: 'Ошибки',
-                                    items: [
-                                        {
-                                            xtype: 'displayfield',
-                                            reference: 'errors',
-                                            width: 418,
-                                            fieldLabel: 'Label',
-                                            value: 'Display Field'
-                                        },
-                                        {
-                                            xtype: 'button',
-                                            itemId: 'mybutton',
-                                            text: 'Получить',
-                                            listeners: {
-                                                click: 'onMybuttonClick'
-                                            }
-                                        },
-                                        {
-                                            xtype: 'gridpanel',
-                                            title: 'My Grid Panel',
-                                            store: 'errors',
-                                            columns: [
-                                                {
-                                                    xtype: 'gridcolumn',
-                                                    dataIndex: 'id_err',
-                                                    text: 'Номер'
-                                                },
-                                                {
-                                                    xtype: 'gridcolumn',
-                                                    dataIndex: 'code',
-                                                    text: 'Код'
-                                                },
-                                                {
-                                                    xtype: 'gridcolumn',
-                                                    dataIndex: 'desc_err_ru',
-                                                    text: 'Описание ру'
-                                                },
-                                                {
-                                                    xtype: 'gridcolumn',
-                                                    dataIndex: 'desc_err_uz',
-                                                    text: 'Описание уз'
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    xtype: 'panel',
                                     height: 496,
-                                    title: 'Трудовая',
+                                    title: 'Полная детальная информация по ТК',
                                     items: [
                                         {
                                             xtype: 'displayfield',
@@ -159,6 +109,225 @@ Ext.define('etkfront.view.MyViewport', {
                                             text: 'Получить',
                                             listeners: {
                                                 click: 'onMybuttonClick1'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            store: 'works',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'id_lc',
+                                                    text: 'Уникальный идентификатор в LC'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'parent_id_lc',
+                                                    text: 'Родительская запись'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'active_lc',
+                                                    text: 'Активность ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'datetime_lc',
+                                                    text: 'Дата создания записи'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'daterange_lc',
+                                                    text: 'Диапазон действия ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'type_lc',
+                                                    text: 'Тип записи (Трудовая деятельность, Образование, Военная служба)'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'direct_lc',
+                                                    text: 'Направление записи ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'edit_id_lc',
+                                                    text: 'Редактируемая запись'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'pin_lc',
+                                                    text: 'ПИН ФЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'taxper_lc',
+                                                    text: 'ИНН ФЛ в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'passport_lc',
+                                                    text: 'Паспорт'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'familyperson_lc',
+                                                    text: 'Фамилия'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'nameperson_lc',
+                                                    text: 'Имя'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'midlenameperson_lc',
+                                                    text: 'Отчество'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'tin_lc',
+                                                    text: 'ИНН ЮЛ в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'name_lc',
+                                                    text: 'Наименование ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'oked_lc',
+                                                    text: 'ОКЭД в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'regionent_lc',
+                                                    text: 'СОАТО ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'department_lc',
+                                                    text: 'Подразделение ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'position_lc',
+                                                    text: 'Должность'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'prof_lc',
+                                                    text: 'Код профессии, должности'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'id_position',
+                                                    text: 'Уникальный идентификатор должности'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'salary_lc',
+                                                    text: 'Зарплата'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'flagbonus_lc',
+                                                    text: 'Признак надбавка'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'termsalaru_lc',
+                                                    text: 'Условия оплаты труда'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'typeemp_lc',
+                                                    text: 'Вид занятости ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codenskz_lc',
+                                                    text: 'Код по НСКЗ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'order_lc',
+                                                    text: 'Приказ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'dateorder_lc',
+                                                    text: 'Дата приказа'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'article_lc',
+                                                    text: 'Статья'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'specspo_lc',
+                                                    text: 'Учебная специальность СПО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codespo_ls',
+                                                    text: 'Код специальности СПО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'specvo_ls',
+                                                    text: 'Учебная специальность ВО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codevo_ls',
+                                                    text: 'Код специальности ВО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'acceptemployer_lc',
+                                                    text: 'Подтверждение работодателя'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'acceptemployee_lc',
+                                                    text: 'Подтверждение работника'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'warehouse_id',
+                                                    text: 'Идентификатор записи в Хранилище'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'value_fields_lc',
+                                                    text: 'Значения полей ТД'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    height: 451,
+                                    title: 'Обобщенная информация по трудовой',
+                                    items: [
+                                        {
+                                            xtype: 'displayfield',
+                                            reference: 'errors',
+                                            width: 418,
+                                            fieldLabel: 'Label',
+                                            value: 'Display Field'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            itemId: 'mybutton',
+                                            text: 'Получить',
+                                            listeners: {
+                                                click: 'onMybuttonClick'
                                             }
                                         },
                                         {
@@ -378,23 +547,44 @@ Ext.define('etkfront.view.MyViewport', {
                             layout: 'column',
                             items: [
                                 {
-                                    xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
+                                    xtype: 'textfield',
+                                    reference: 'pinju',
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
-                                    xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
+                                    xtype: 'textfield',
+                                    reference: 'tinju',
+                                    fieldLabel: 'ИНН ЮЛ'
                                 },
                                 {
-                                    xtype: 'displayfield',
-                                    fieldLabel: 'Token',
-                                    value: 'Display Field'
+                                    xtype: 'textfield',
+                                    fieldLabel: 'СОАТО'
                                 },
                                 {
-                                    xtype: 'displayfield',
-                                    fieldLabel: 'RenewToken',
-                                    value: 'Display Field'
+                                    xtype: 'textareafield',
+                                    reference: 'tokenju',
+                                    height: 100,
+                                    fieldLabel: 'Token'
+                                },
+                                {
+                                    xtype: 'textareafield',
+                                    reference: 'refreshju',
+                                    height: 100,
+                                    fieldLabel: 'RenewToken'
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Получить',
+                                    listeners: {
+                                        click: 'onButtonClick2'
+                                    }
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'обновить',
+                                    listeners: {
+                                        click: 'onButtonClick11'
+                                    }
                                 }
                             ]
                         },
@@ -404,15 +594,227 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Физ лицо'
+                                    title: 'Структура организации',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Компания'
+                                    title: 'Список должностей',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Tab 3'
+                                    title: 'Список сотрудников на дату',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Активные трудовые договоры',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Список своих пользователей',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Детализированная информация по ТК своего сотрудника',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Обощенная информация по ТК своего сотрудника',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -429,12 +831,19 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
+                                    fieldLabel: 'ИНН ЮЛ'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'СОАТО'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'СОАТО МИНЗТО'
                                 },
                                 {
                                     xtype: 'displayfield',
@@ -454,15 +863,103 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Физ лицо'
+                                    title: 'Список всех своих организаций(структур)',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Компания'
+                                    title: 'Список всех своих работающих по организации нах в его ведении(соато в иерархии) на конкретную дату',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Tab 3'
+                                    title: 'Должности любой организации но из своего региона',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'пока все'
                                 }
                             ]
                         }
@@ -479,12 +976,19 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Логин'
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
-                                    fieldLabel: 'Пароль',
-                                    value: 'Display Field'
+                                    fieldLabel: 'ПИН ФЛ'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'ПИН ФЛ'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    fieldLabel: 'ПИН ФЛ'
                                 },
                                 {
                                     xtype: 'displayfield',
@@ -504,15 +1008,163 @@ Ext.define('etkfront.view.MyViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Физ лицо'
+                                    title: 'Справочник констант',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Компания'
+                                    title: 'Справочник пользователей',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
-                                    title: 'Tab 3'
+                                    title: 'Лог журнал',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Коды ошибок',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: 'Лог по записи',
+                                    items: [
+                                        {
+                                            xtype: 'gridpanel',
+                                            title: 'My Grid Panel',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'string',
+                                                    text: 'String'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    dataIndex: 'number',
+                                                    text: 'Number'
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'date',
+                                                    text: 'Date'
+                                                },
+                                                {
+                                                    xtype: 'booleancolumn',
+                                                    dataIndex: 'bool',
+                                                    text: 'Boolean'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }
