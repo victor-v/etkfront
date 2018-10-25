@@ -38,8 +38,8 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "rootProperty": "data.DATA",
-                        "totalProperty": "data.TOTAL"
+                        "rootProperty": "data.data",
+                        "totalProperty": "data.total"
                     },
                     "configAlternates": {
                         "rootProperty": "string",
