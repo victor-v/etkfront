@@ -184,6 +184,13 @@ Ext.define('etkfront.view.MyViewportViewController', {
                 console.log(response);
             }
         });
+    },
+
+    onMybuttonClick11: function(button, e, eOpts) {
+        Ext.getStore('lcju').load({params:{
+            tin:'628261',
+            page:1
+        }});
     }
 
 });

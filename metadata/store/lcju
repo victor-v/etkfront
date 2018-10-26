@@ -7,11 +7,13 @@
     "codeClass": null,
     "userConfig": {
         "designer|userClassName": "lcju",
+        "model": "worksju",
         "storeId": "lcju"
     },
     "configAlternates": {
         "designer|userClassName": "string",
-        "storeId": "string"
+        "storeId": "string",
+        "model": "model"
     },
     "name": "MyStore2",
     "designerId": "3741e9a9-66e6-4d97-9a77-cefcc2be6039"

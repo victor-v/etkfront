@@ -8,7 +8,8 @@
     "userConfig": {
         "models": [
             "errors",
-            "works"
+            "works",
+            "worksju"
         ],
         "name": "etkfront",
         "stores": [
