@@ -16,11 +16,16 @@
 Ext.define('etkfront.store.lcju', {
     extend: 'Ext.data.Store',
 
+    requires: [
+        'etkfront.model.worksju'
+    ],
+
     constructor: function(cfg) {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
-            storeId: 'lcju'
+            storeId: 'lcju',
+            model: 'etkfront.model.worksju'
         }, cfg)]);
     }
 });

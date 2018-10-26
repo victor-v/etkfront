@@ -661,28 +661,207 @@ Ext.define('etkfront.view.MyViewport', {
                                     title: 'Список сотрудников на дату',
                                     items: [
                                         {
+                                            xtype: 'button',
+                                            itemId: 'mybutton2',
+                                            text: 'Получить',
+                                            listeners: {
+                                                click: 'onMybuttonClick11'
+                                            }
+                                        },
+                                        {
                                             xtype: 'gridpanel',
                                             title: 'My Grid Panel',
+                                            store: 'lcju',
                                             columns: [
                                                 {
                                                     xtype: 'gridcolumn',
-                                                    dataIndex: 'string',
-                                                    text: 'String'
+                                                    dataIndex: 'id_lc',
+                                                    text: 'Уникальный идентификатор в LC'
                                                 },
                                                 {
-                                                    xtype: 'numbercolumn',
-                                                    dataIndex: 'number',
-                                                    text: 'Number'
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'parent_id_lc',
+                                                    text: 'Родительская запись'
                                                 },
                                                 {
-                                                    xtype: 'datecolumn',
-                                                    dataIndex: 'date',
-                                                    text: 'Date'
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'active_lc',
+                                                    text: 'Активность ТД'
                                                 },
                                                 {
-                                                    xtype: 'booleancolumn',
-                                                    dataIndex: 'bool',
-                                                    text: 'Boolean'
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'datetime_lc',
+                                                    text: 'Дата создания записи'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'daterange_lc',
+                                                    text: 'Диапазон действия ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'type_lc',
+                                                    text: 'Тип записи (Трудовая деятельность, Образование, Военная служба)'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'direct_lc',
+                                                    text: 'Направление записи ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'edit_id_lc',
+                                                    text: 'Редактируемая запись'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'pin_lc',
+                                                    text: 'ПИН ФЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'taxper_lc',
+                                                    text: 'ИНН ФЛ в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'passport_lc',
+                                                    text: 'Паспорт'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'familyperson_lc',
+                                                    text: 'Фамилия'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'nameperson_lc',
+                                                    text: 'Имя'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'midlenameperson_lc',
+                                                    text: 'Отчество'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'tin_lc',
+                                                    text: 'ИНН ЮЛ в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'name_lc',
+                                                    text: 'Наименование ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'oked_lc',
+                                                    text: 'ОКЭД в ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'regionent_lc',
+                                                    text: 'СОАТО ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'department_lc',
+                                                    text: 'Подразделение ЮЛ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'position_lc',
+                                                    text: 'Должность'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'prof_lc',
+                                                    text: 'Код профессии, должности'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'id_position',
+                                                    text: 'Уникальный идентификатор должности'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'salary_lc',
+                                                    text: 'Зарплата'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'flagbonus_lc',
+                                                    text: 'Признак надбавка'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'termsalaru_lc',
+                                                    text: 'Условия оплаты труда'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'typeemp_lc',
+                                                    text: 'Вид занятости ТД'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codenskz_lc',
+                                                    text: 'Код по НСКЗ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'order_lc',
+                                                    text: 'Приказ'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'dateorder_lc',
+                                                    text: 'Дата приказа'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'article_lc',
+                                                    text: 'Статья'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'specspo_lc',
+                                                    text: 'Учебная специальность СПО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codespo_ls',
+                                                    text: 'Код специальности СПО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'specvo_ls',
+                                                    text: 'Учебная специальность ВО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'codevo_ls',
+                                                    text: 'Код специальности ВО'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'acceptemployer_lc',
+                                                    text: 'Подтверждение работодателя'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'acceptemployee_lc',
+                                                    text: 'Подтверждение работника'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'warehouse_id',
+                                                    text: 'Идентификатор записи в Хранилище'
+                                                },
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    dataIndex: 'value_fields_lc',
+                                                    text: 'Значения полей ТД'
                                                 }
                                             ]
                                         }
